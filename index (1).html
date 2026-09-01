@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adham Ibrahim Ahmed — AI &amp; Data Science Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #060810;
+    --panel: #0c0f1c;
+    --panel-soft: #10142400;
+    --cyan: #33e8ff;
+    --pink: #ff3ec8;
+    --violet: #8b5cff;
+    --paper: #eef6ff;
+    --dim: #7c8aa3;
+    --line: rgba(150, 200, 255, 0.14);
+    --max-w: 1140px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--paper);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ---------- Ambient neon background ---------- */
+  .bg-glow {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .bg-glow span {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.28;
+  }
+
+  .bg-glow .g1 {
+    width: 520px; height: 520px;
+    background: var(--cyan);
+    top: -160px; left: -120px;
+    animation: drift1 22s ease-in-out infinite alternate;
+  }
+
+  .bg-glow .g2 {
+    width: 460px; height: 460px;
+    background: var(--pink);
+    top: 30%; right: -160px;
+    animation: drift2 26s ease-in-out infinite alternate;
+  }
+
+  .bg-glow .g3 {
+    width: 480px; height: 480px;
+    background: var(--violet);
+    bottom: -200px; left: 20%;
+    animation: drift3 30s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift1 { from { transform: translate(0,0); } to { transform: translate(80px, 60px); } }
+  @keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-70px, 90px); } }
+  @keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(60px, -70px); } }
+
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 20%, transparent 75%);
+    opacity: 0.5;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: inherit; }
+
+  .wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  ::selection { background: var(--pink); color: var(--void); }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(6, 8, 16, 0.78);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 66px;
+  }
+
+  .nav-mark {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+    text-shadow: 0 0 12px rgba(51, 232, 255, 0.55);
+  }
+
+  .nav-mark span { color: var(--cyan); }
+
+  .nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    font-size: 14.5px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .nav-links a {
+    position: relative;
+    text-decoration: none;
+    color: var(--dim);
+    transition: color 0.2s ease;
+    padding: 4px 0;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 0%;
+    height: 1px;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+    transition: width 0.25s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: var(--paper);
+  }
+
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 100px 0 88px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.05fr 0.8fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--cyan);
+    margin-bottom: 18px;
+    text-shadow: 0 0 10px rgba(51,232,255,0.5);
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    line-height: 1.18;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 .accent {
+    background: linear-gradient(92deg, var(--cyan), var(--pink) 55%, var(--violet));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 6s linear infinite;
+  }
+
+  @keyframes shine {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .hero p.lede {
+    color: var(--dim);
+    font-size: 17.5px;
+    max-width: 48ch;
+    margin-bottom: 20px;
+  }
+
+  .hero p.usp {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    color: var(--paper);
+    font-size: 0.98rem;
+    max-width: 44ch;
+    margin-bottom: 32px;
+    padding: 12px 16px;
+    border-left: 2px solid var(--pink);
+    background: rgba(255, 62, 200, 0.06);
+  }
+
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn {
+    position: relative;
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid var(--line);
+    color: var(--paper);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn span { position: relative; z-index: 1; }
+
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+    transform: translateX(-120%);
+    transition: transform 0.6s ease;
+  }
+
+  .btn:hover::before { transform: translateX(120%); }
+
+  .btn-primary {
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
+    border-color: transparent;
+    color: #04060c;
+    font-weight: 600;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 22px rgba(51, 232, 255, 0.55), 0 0 40px rgba(139, 92, 255, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 16px rgba(51, 232, 255, 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* Hero photo */
+  .photo-frame {
+    position: relative;
+    justify-self: center;
+    width: 280px;
+    height: 280px;
+  }
+
+  .photo-ring {
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--cyan), var(--pink), var(--violet), var(--cyan));
+    animation: spin 8s linear infinite;
+    filter: blur(1px);
+  }
+
+  .photo-ring::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    background: var(--void);
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .photo-frame img {
+    position: absolute;
+    inset: 14px;
+    width: calc(100% - 28px);
+    height: calc(100% - 28px);
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 1;
+    box-shadow: 0 0 40px rgba(51, 232, 255, 0.25);
+  }
+
+  .photo-caption {
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--dim);
+  }
+
+  /* ---------- Section shared ---------- */
+  section { padding: 92px 0; border-bottom: 1px solid var(--line); position: relative; z-index: 1; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 56px;
+    margin-bottom: 8px;
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--cyan);
+    padding-top: 6px;
+    text-shadow: 0 0 10px rgba(51,232,255,0.45);
+  }
+
+  .section-body { max-width: 66ch; }
+  .section-body h2 { font-size: 1.85rem; margin-bottom: 22px; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ---------- About ---------- */
+  .about-body p { color: #C8D3E6; margin-bottom: 18px; }
+  .about-body p strong { color: var(--paper); font-weight: 600; }
+
+  .usp-block {
+    margin-top: 30px;
+    padding: 26px 28px;
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--cyan);
+    background: linear-gradient(120deg, rgba(51,232,255,0.06), rgba(139,92,255,0.05));
+    box-shadow: 0 0 30px rgba(51,232,255,0.08);
+  }
+
+  .usp-block h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--cyan);
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .usp-block p { color: #DCE6F5; margin-bottom: 0; font-size: 16.5px; }
+
+  /* ---------- Skills ---------- */
+  .skill-groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    max-width: 720px;
+  }
+
+  .skill-group h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--pink);
+    text-shadow: 0 0 8px rgba(255,62,200,0.4);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--paper);
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  }
+
+  .tag:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 12px rgba(51,232,255,0.35);
+    transform: translateY(-2px);
+  }
+
+  /* ---------- Services ---------- */
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 760px;
+  }
+
+  .service-card {
+    position: relative;
+    padding: 26px 24px 22px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(12, 15, 28, 0.92), rgba(9, 13, 22, 0.9));
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  }
+
+  .service-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--pink), var(--violet));
+  }
+
+  .service-card:hover {
+    border-color: rgba(51, 232, 255, 0.5);
+    box-shadow: 0 0 24px rgba(51, 232, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .service-card .service-tag {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .service-card p {
+    color: #C8D3E6;
+    margin-bottom: 14px;
+    font-size: 15.5px;
+  }
+
+  .service-card ul {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+
+  .service-card li {
+    position: relative;
+    padding-left: 18px;
+    color: #DDE8F8;
+    font-size: 14px;
+  }
+
+  .service-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--cyan), var(--pink));
+    box-shadow: 0 0 12px rgba(51,232,255,0.35);
+  }
+
+  /* ---------- Timeline (Experience/Training) ---------- */
+  .timeline { max-width: 66ch; }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 26px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+
+  .tl-item:first-child { border-top: none; padding-top: 0; }
+
+  .tl-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--dim);
+    padding-top: 3px;
+  }
+
+  .tl-content h3 { font-size: 1.08rem; margin-bottom: 6px; }
+  .tl-content .role { color: var(--cyan); font-size: 13.5px; font-family: 'IBM Plex Mono', monospace; margin-bottom: 8px; display:block; }
+  .tl-content p { color: #C8D3E6; font-size: 15.5px; margin-bottom: 6px; }
+  .tl-content ul { color: #C8D3E6; font-size: 15px; padding-left: 18px; margin-top: 8px; }
+  .tl-content li { margin-bottom: 4px; }
+
+  /* ---------- Projects ---------- */
+  .case {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 56px;
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+    transition: background 0.2s ease;
+  }
+
+  .case:hover { background: rgba(51, 232, 255, 0.025); }
+  .case:last-child { padding-bottom: 0; }
+
+  .case-meta h3 { font-size: 1.22rem; margin-bottom: 10px; }
+
+  .case-stack {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--violet);
+    line-height: 1.8;
+  }
+
+  .case-body { max-width: 62ch; }
+  .case-body p { color: #C8D3E6; margin-bottom: 14px; }
+
+  .case-result {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px;
+    color: var(--cyan);
+    border-left: 2px solid var(--cyan);
+    padding-left: 12px;
+    margin-top: 6px;
+    text-shadow: 0 0 8px rgba(51,232,255,0.35);
+  }
+
+  /* ---------- Education ---------- */
+  .edu-block { max-width: 66ch; margin-bottom: 36px; }
+  .edu-block h3 { font-size: 1.1rem; margin-bottom: 6px; }
+  .edu-block .edu-meta { font-family: 'IBM Plex Mono', monospace; color: var(--dim); font-size: 13px; margin-bottom: 14px; display:block; }
+  .edu-block .tags { margin-top: 4px; }
+
+  .additional-edu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 66ch;
+    margin-top: 8px;
+  }
+
+  .additional-edu .item {
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.015);
+  }
+
+  .additional-edu .item h4 { font-size: 0.98rem; margin-bottom: 6px; color: var(--paper); }
+  .additional-edu .item p { color: var(--dim); font-size: 13.5px; }
+
+  .interests-block {
+    margin-top: 36px;
+    padding: 22px 24px;
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--violet);
+    background: rgba(139, 92, 255, 0.05);
+    max-width: 66ch;
+  }
+  .interests-block h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--violet);
+    margin-bottom: 10px;
+  }
+  .interests-block p { color: #C8D3E6; font-size: 15px; margin-bottom: 0; }
+
+  /* ---------- Contact ---------- */
+  .contact { border-bottom: none; padding-bottom: 110px; }
+  .contact .wrap { max-width: 720px; }
+
+  .contact h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin-bottom: 18px;
+    max-width: 20ch;
+  }
+
+  .contact p.lede { color: var(--dim); font-size: 16.5px; max-width: 52ch; margin-bottom: 20px; }
+
+  .contact-info {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14.5px;
+    color: var(--cyan);
+    margin-bottom: 32px;
+    text-shadow: 0 0 8px rgba(51,232,255,0.3);
+  }
+
+  .contact-links { display: flex; flex-wrap: wrap; gap: 16px; }
+
+  footer { padding: 28px 0; position: relative; z-index: 1; }
+
+  footer .wrap {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--dim);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    .hero { padding: 64px 0 56px; }
+    .photo-frame { order: -1; margin-bottom: 12px; width: 200px; height: 200px; }
+    .section-head { grid-template-columns: 1fr; gap: 16px; }
+    .nav-links { gap: 18px; font-size: 13px; }
+    .wrap { padding: 0 20px; }
+    .case, .tl-item { grid-template-columns: 1fr; gap: 10px; }
+    .case-stack { margin-bottom: 4px; }
+    .skill-groups, .additional-edu, .service-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .bg-glow span, .photo-ring, .hero h1 .accent { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow"><span class="g1"></span><span class="g2"></span><span class="g3"></span></div>
+<div class="grid-overlay"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark">ADHAM<span>.</span>AI</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-eyebrow mono">AI &amp; Data Science Engineer · Machine Learning</div>
+      <h1>Turning raw data into <span class="accent">decisions worth trusting.</span></h1>
+      <p class="usp">I don't just train a model and hand over a metric. I ship it: a working API, a monitored pipeline, a deployed interface someone can actually click on — and I can explain exactly why it decided what it decided.</p>
+      <p class="lede">I'm Adham Ibrahim Ahmed, a Data Science student and aspiring Machine Learning Engineer, building classifiers, dashboards, and end-to-end applications that turn messy data into something a team can actually use.</p>
+      <div class="hero-cta">
+        <a href="#about" class="btn btn-primary"><span>Read my story</span></a>
+        <a href="#contact" class="btn btn-ghost"><span>Get in touch</span></a>
+      </div>
+    </div>
+
+    <div>
+      <div class="photo-frame">
+        <div class="photo-ring"></div>
+        <img src="data:image/jpeg;base64,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" alt="Portrait of Adham Ibrahim Ahmed">
+      </div>
+      <div class="photo-caption mono">Alexandria, Egypt</div>
+    </div>
+  </div>
+</header>
+
+<section class="about reveal" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label mono">01 — About</div>
+      <div class="section-body about-body">
+        <h2>My journey with data</h2>
+        <p>My journey began with the <strong>DEPI AWS Machine Learning Engineer track</strong>, where I honed my skills building clear, insightful dashboards and mastering SQL to pull the numbers that actually matter out of messy tables. But I didn't stop at reporting — my love for automation led me to build Python tools and APIs that take over the repetitive parts of data work, so the analysis gets the attention instead.</p>
+        <p>As a <strong>Data Science student at the Faculty of Artificial Intelligence, Kafr El Sheikh University</strong>, I've paired that hands-on training with real academic depth: computer vision, natural language processing, computer networks, database systems, operating systems, and machine learning theory. I also serve as a <strong>Machine Learning / NLP Committee Member at IEEE</strong>, where I stay close to how the field is actually moving.</p>
+        <p>Beyond the technical side, I believe data should tell a story</p>
+
+        <div class="usp-block">
+          <h3>Why work with me</h3>
+          <p>I'm happy to walk you through a project in plain terms, so you can make informed decisions about your own data and models — no jargon required. And once the work is delivered, I follow up to make sure it's actually holding up in production, not just sitting in a repo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills reveal" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label mono">02 — Skills</div>
+      <div class="section-body">
+        <h2>Tools &amp; skills</h2>
+      </div>
+    </div>
+
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Programming</h3>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">C++</span><span class="tag">C</span><span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>ML / Data</h3>
+        <div class="tags">
+          <span class="tag">Scikit-learn</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Seaborn</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>AI / Deep Learning</h3>
+        <div class="tags">
+          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Backend &amp; APIs</h3>
+        <div class="tags">
+          <span class="tag">FastAPI</span><span class="tag">SQLAlchemy</span><span class="tag">JWT / OAuth2</span><span class="tag">Pytest</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Cloud &amp; DevOps</h3>
+        <div class="tags">
+          <span class="tag">AWS (EC2, VPC, IAM)</span><span class="tag">Docker</span><span class="tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Concurrency</h3>
+        <div class="tags">
+          <span class="tag">asyncio</span><span class="tag">aiohttp</span><span class="tag">coroutines</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>MLOps</h3>
+        <div class="tags">
+          <span class="tag">MLflow</span><span class="tag">Model monitoring</span><span class="tag">Model versioning</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Data Engineering &amp; Tools</h3>
+        <div class="tags">
+          <span class="tag">ETL</span><span class="tag">Data wrangling</span><span class="tag">Streamlit</span><span class="tag">Excel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services reveal" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label mono">03 — Services</div>
+      <div class="section-body">
+        <h2>How I can help</h2>
+      </div>
+    </div>
+
+    <div class="service-grid">
+      <article class="service-card">
+        <div class="service-tag">AI &amp; ML</div>
+        <h3>Custom machine learning solutions</h3>
+        <p>I build practical models for classification, forecasting, and optimization, from problem framing and feature engineering to validation and deployment.</p>
+        <ul>
+          <li>Predictive modeling</li>
+          <li>Feature engineering</li>
+          <li>Model evaluation &amp; explainability</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <div class="service-tag">Data</div>
+        <h3>Data analysis &amp; dashboards</h3>
+        <p>I turn raw, messy datasets into clear dashboards and management-ready insights that highlight the metrics that actually drive decisions.</p>
+        <ul>
+          <li>SQL reporting</li>
+          <li>ETL &amp; wrangling</li>
+          <li>Excel / Python dashboards</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <div class="service-tag">NLP / CV</div>
+        <h3>Language &amp; vision systems</h3>
+        <p>I design text and image workflows for classification, extraction, and automation use cases where pattern detection and context matter.</p>
+        <ul>
+          <li>Text classification</li>
+          <li>OCR &amp; computer vision</li>
+          <li>Document intelligence pipelines</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <div class="service-tag">Delivery</div>
+        <h3>APIs, automation &amp; MLOps</h3>
+        <p>I deliver the operational layer around models so solutions are not just accurate but usable: APIs, background automation, Dockerized deploys, and monitoring.</p>
+        <ul>
+          <li>FastAPI services</li>
+          <li>Docker &amp; AWS deployment</li>
+          <li>Model versioning &amp; monitoring</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="experience reveal" id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label mono">04 — Experience</div>
+      <div class="section-body">
+        <h2>Experience &amp; training</h2>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date mono">Jul 2025 — Aug 2025</div>
+        <div class="tl-content">
+          <h3>IEEE</h3>
+          <span class="role">Machine Learning Committee Member / NLP Committee Member</span>
+          <ul>
+            <li>Solved medical real-world problems as part of an IEEE member committee, applying hands-on data science</li>
+            <li>Applied feature engineering, modeling, and evaluation across diabetes datasets, improving baseline model performance by 85%</li>
+            <li>Built and deployed ML models achieving 90% accuracy on a classification task using Streamlit and Scikit-learn</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date mono">Jul 2026 — Dec 2026 </div>
+        <div class="tl-content">
+          <h3>Digital Egypt Pioneers Initiative (DEPI)</h3>
+          <span class="role">AWS Machine Learning Engineer Track — Trainee</span>
+          <p>Covering prompt engineering, AWS data engineering, ML foundations, NLP, and generative AI.</p>
+          <p>Pursuing AWS Cloud Practitioner (CLF-C02) in parallel, with practical labs on VPC, EC2, IAM, and networking — CIDR, subnets, Security Groups, NAT Gateway, AMIs, and IAM roles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects reveal" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label mono">05 — Projects</div>
+      <div class="section-body">
+        <h2>Selected work</h2>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-meta">
+        <h3>Email Spam Classifier</h3>
+        <div class="case-stack">TF-IDF<br>Logistic Regression<br>Enron / TREC datasets</div>
+      </div>
+      <div class="case-body">
+        <p>A spam filter that goes beyond keyword matching — combining TF-IDF text features with handcrafted signals like URL count, capitalization ratio, and exclamation-mark frequency to catch what a simple word-count model would miss. Presented as a full 24-slide technical walkthrough.</p>
+        <div class="case-result">97.6% accuracy · 0.997 ROC-AUC</div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-meta">
+        <h3>Medical Condition Prediction API</h3>
+        <div class="case-stack">Python<br>FastAPI<br>SQLAlchemy · Docker</div>
+      </div>
+      <div class="case-body">
+        <p>An end-to-end ML pipeline serving predictions through a FastAPI backend with SQLAlchemy persistence across multiple endpoints, containerized with Docker and paired with a live Streamlit interface. Structured error handling and automated tests keep it reliable.</p>
+        <div class="case-result">50 requests/predictions · 30ms avg latency · 100% test coverage</div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-meta">
+        <h3>Student Performance Prediction</h3>
+        <div class="case-stack">Python<br>scikit-learn<br>Pandas · Matplotlib/Seaborn</div>
+      </div>
+      <div class="case-body">
+        <p>Cleaned and preprocessed a 50,000-row raw dataset, then built a logistic/linear regression model forecasting student pass/fail outcomes from academic and behavioral features — aimed at flagging risk early enough to actually be useful to an educator.</p>
+        <div class="case-result">80% accuracy · 90% of at-risk students identified</div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-meta">
+        <h3>Customer Segmentation</h3>
+        <div class="case-stack">Python<br>K-Means<br>Data Visualization</div>
+      </div>
+      <div class="case-body">
+        <p>Applied K-Means clustering to segment supermarket customers by purchasing behavior rather than gut feeling, turning a flat transaction table into segments a marketing or product team can actually act on.</p>
+        <div class="case-result">100 customers → 4 segments · +90% projected campaign targeting</div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-meta">
+        <h3>Diabetes Risk Predictor</h3>
+        <div class="case-stack">Python<br>FastAPI · Docker<br>SQLAlchemy · Streamlit</div>
+      </div>
+      <div class="case-body">
+        <p>A logistic regression risk-scoring model built on 2,000 rows of patient data, deployed via FastAPI and Streamlit, containerized with Docker and backed by SQLAlchemy — designed with the interpretability a clinical setting demands.</p>
+        <div class="case-result">85% accuracy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="education reveal" id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label mono">06 — Education</div>
+      <div class="section-body">
+        <h2>Background</h2>
+      </div>
+    </div>
+
+    <div class="edu-block">
+      <h3>B.Sc. Data Science — Faculty of Artificial Intelligence</h3>
+      <span class="edu-meta">Kafr El Sheikh University, Egypt · Oct 2024 – May 2028</span>
+      <p style="color:#C8D3E6; margin-bottom:14px; font-size:15.5px;">Core coursework spans the full AI stack — from theory to systems:</p>
+      <div class="tags">
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Deep Learning</span>
+        <span class="tag">Natural Language Processing</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">Computer Networks</span>
+        <span class="tag">Database Systems</span>
+        <span class="tag">Operating Systems</span>
+        <span class="tag">Probability &amp; Statistics</span>
+        <span class="tag">Data Visualization</span>
+        <span class="tag">Design &amp; Analysis of Experiments</span>
+      </div>
+    </div>
+
+    <div class="additional-edu">
+      <div class="item">
+        <h4>DataCamp — Python &amp; C++ Foundations</h4>
+        <p>OOP, Data Structures &amp; Algorithms, STL, GUI. Built a to-do list app, a delivery-app CLI, and a calculator GUI. June 2025.</p>
+      </div>
+      <div class="item">
+        <h4>Coursera (IBM) — Machine Learning</h4>
+        <p>Applied ML to real-world datasets, covering dataset handling and pipeline design. December 2025.</p>
+      </div>
+    </div>
+
+    <div class="interests-block">
+      <h3 class="mono">Languages &amp; interests</h3>
+      <p>Arabic-language AI education — authored . Outside of ML: Linux customization (Arch-based distros, Hyprland, i3) and systems programming in C++.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Have data that should be doing more for you?</h2>
+    <p class="lede">Let's talk about what a model, a dashboard, or a well-built API could actually do for your project — in plain terms, from the first conversation to the follow-up after launch.</p>
+    <div class="contact-info mono">adhamelzaim925@gmail.com · +20 127 367 8522 · Alexandria, Egypt</div>
+    <div class="contact-links">
+      <a href="mailto:adhamelzaim925@gmail.com" class="btn btn-primary"><span>Email me</span></a>
+      <a href="https://www.linkedin.com/in/adham-elzaim/" class="btn btn-ghost" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+      <a href="https://github.com/ELZAIM1" class="btn btn-ghost" target="_blank" rel="noopener"><span>GitHub</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Adham Ibrahim Ahmed</span>
+    <span>AI &amp; Data Science Engineer</span>
+  </div>
+</footer>
+
+<script>
+  // Single orchestrated reveal-on-scroll for each section
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
