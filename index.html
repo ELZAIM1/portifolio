@@ -592,6 +592,79 @@
   }
   .interests-block p { color: #C8D3E6; font-size: 15px; margin-bottom: 0; }
 
+  /* ---------- Certificates ---------- */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 760px;
+  }
+
+  .cert-card {
+    position: relative;
+    padding: 26px 24px 22px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(12, 15, 28, 0.92), rgba(9, 13, 22, 0.9));
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  }
+
+  .cert-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--pink), var(--violet));
+  }
+
+  .cert-card:hover {
+    border-color: rgba(51, 232, 255, 0.5);
+    box-shadow: 0 0 24px rgba(51, 232, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .cert-issuer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+
+  .cert-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+
+  .cert-card > p { color: #C8D3E6; font-size: 15px; margin-bottom: 14px; }
+
+  .cert-meta {
+    list-style: none;
+    display: grid;
+    gap: 6px;
+    margin-bottom: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--dim);
+  }
+
+  .cert-meta strong { color: var(--paper); font-weight: 500; }
+
+  .cert-result {
+    display: inline-block;
+    align-self: flex-start;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--cyan);
+    border-left: 2px solid var(--cyan);
+    padding-left: 12px;
+    margin-bottom: 18px;
+    text-shadow: 0 0 8px rgba(51,232,255,0.35);
+  }
+
+  .cert-card .btn { margin-top: auto; align-self: flex-start; padding: 9px 18px; font-size: 13px; }
+
   /* ---------- Contact ---------- */
   .contact { border-bottom: none; padding-bottom: 110px; }
   .contact .wrap { max-width: 720px; }
@@ -627,6 +700,93 @@
     gap: 8px;
   }
 
+  /* ---------- AI chat widget ---------- */
+  .chat-fab {
+    position: fixed;
+    right: 24px; bottom: 24px;
+    z-index: 50;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #04060c;
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    box-shadow: 0 0 22px rgba(51,232,255,0.45), 0 0 40px rgba(139,92,255,0.3);
+    transition: transform 0.15s ease;
+  }
+  .chat-fab:hover { transform: translateY(-2px); }
+
+  .chat-panel {
+    position: fixed;
+    right: 24px; bottom: 84px;
+    z-index: 50;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    height: 480px;
+    max-height: calc(100vh - 120px);
+    display: none;
+    flex-direction: column;
+    background: rgba(12, 15, 28, 0.97);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--cyan);
+    box-shadow: 0 0 40px rgba(51,232,255,0.12);
+    backdrop-filter: blur(10px);
+  }
+  .chat-panel.open { display: flex; }
+
+  .chat-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--cyan);
+  }
+  .chat-head button {
+    background: none; border: none; color: var(--dim);
+    font-size: 18px; cursor: pointer; line-height: 1;
+  }
+
+  .chat-log {
+    flex: 1; overflow-y: auto;
+    padding: 16px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .chat-msg {
+    max-width: 88%;
+    padding: 9px 13px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .chat-msg.bot  { align-self: flex-start; color: #DCE6F5; background: rgba(255,255,255,0.04); border-left: 2px solid var(--cyan); }
+  .chat-msg.user { align-self: flex-end;  color: #04060c;  background: linear-gradient(90deg, var(--cyan), var(--violet)); }
+
+  .chat-suggest { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 10px; }
+  .chat-suggest button {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+    color: var(--paper); background: rgba(255,255,255,0.02);
+    border: 1px solid var(--line); padding: 5px 9px; cursor: pointer;
+  }
+  .chat-suggest button:hover { border-color: var(--cyan); }
+
+  .chat-input { display: flex; border-top: 1px solid var(--line); }
+  .chat-input input {
+    flex: 1; background: transparent; border: none; outline: none;
+    color: var(--paper); font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px; padding: 14px 16px;
+  }
+  .chat-input button {
+    background: none; border: none; color: var(--cyan);
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+    padding: 0 16px; cursor: pointer;
+  }
+  .chat-input button:disabled { opacity: 0.4; cursor: default; }
+
   /* ---------- Responsive ---------- */
   @media (max-width: 860px) {
     .hero .wrap { grid-template-columns: 1fr; }
@@ -637,7 +797,7 @@
     .wrap { padding: 0 20px; }
     .case, .tl-item { grid-template-columns: 1fr; gap: 10px; }
     .case-stack { margin-bottom: 4px; }
-    .skill-groups, .additional-edu, .service-grid { grid-template-columns: 1fr; }
+    .skill-groups, .additional-edu, .service-grid, .cert-grid { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -662,6 +822,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#education">Education</a></li>
+      <li><a href="#certificates">Certificates</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -1000,6 +1161,47 @@
   </div>
 </section>
 
+<section class="certificates reveal" id="certificates">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label mono">07 — Certificates</div>
+      <div class="section-body">
+        <h2>Certificates</h2>
+      </div>
+    </div>
+
+    <div class="cert-grid">
+
+      <article class="cert-card">
+        <div class="cert-issuer">ITIDA · NTI</div>
+        <h3>Machine Learning — Summer Training</h3>
+        <p>Intensive summer program combining hands-on machine learning with freelancing skills.</p>
+        <ul class="cert-meta">
+          <li><strong>Dates:</strong> 30 Aug – 24 Sep 2026</li>
+          <li><strong>Duration:</strong> 120 hrs (90 technical · 30 freelancing)</li>
+          <li><strong>Student ID:</strong> 276347</li>
+        </ul>
+        <div class="cert-result">Score: 96.5%</div>
+        <a href="assets/ITIDA_NTI_ML_Certificate.pdf" class="btn btn-ghost" target="_blank" rel="noopener"><span>View certificate →</span></a>
+      </article>
+
+      <article class="cert-card">
+        <div class="cert-issuer">IEEE Kafrelsheikh Student Branch</div>
+        <h3>NLP Learning Track — Certificate of Completion</h3>
+        <p>Completed all technical workshops, assignments, and final project deliverables for the 2025–2026 term.</p>
+        <ul class="cert-meta">
+          <li><strong>Issued:</strong> 15 Aug 2026</li>
+          <li><strong>Standing:</strong> Member</li>
+          <li><strong>Credential ID:</strong> IEEE-2026-MC-NLP-16398</li>
+        </ul>
+        <div class="cert-result">Technical Track Completion</div>
+        <a href="assets/IEEE_NLP_Certificate.png" class="btn btn-ghost" target="_blank" rel="noopener"><span>View certificate →</span></a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 <section class="contact" id="contact">
   <div class="wrap">
     <h2>Have data that should be doing more for you?</h2>
@@ -1024,6 +1226,26 @@
   </div>
 </footer>
 
+<!-- ============ AI chat widget (powered by Claude) ============ -->
+<button class="chat-fab" id="chatFab" aria-expanded="false" aria-controls="chatPanel">Ask my AI ✦</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Ask about Adham">
+  <div class="chat-head">
+    <span>ask_adhams_ai()</span>
+    <button id="chatClose" aria-label="Close chat">×</button>
+  </div>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="chat-suggest" id="chatSuggest">
+    <button>What projects has he built?</button>
+    <button>What is his tech stack?</button>
+    <button>How can I hire him?</button>
+  </div>
+  <div class="chat-input">
+    <input id="chatText" type="text" maxlength="500" placeholder="Ask about skills, projects, services…" autocomplete="off">
+    <button id="chatSend">Send</button>
+  </div>
+</div>
+
 <script>
   // Single orchestrated reveal-on-scroll for each section
   const revealEls = document.querySelectorAll('.reveal');
@@ -1040,6 +1262,69 @@
   } else {
     revealEls.forEach((el) => el.classList.add('in'));
   }
+
+  // ---------- AI chat widget ----------
+  (function () {
+    const CHAT_API = "http://localhost:8000/chat";   // <-- replace with your deployed backend URL + /chat
+
+    const fab = document.getElementById('chatFab');
+    const panel = document.getElementById('chatPanel');
+    const log = document.getElementById('chatLog');
+    const input = document.getElementById('chatText');
+    const sendBtn = document.getElementById('chatSend');
+    const suggest = document.getElementById('chatSuggest');
+    const history = [];
+    let busy = false;
+
+    function add(role, text) {
+      const el = document.createElement('div');
+      el.className = 'chat-msg ' + (role === 'user' ? 'user' : 'bot');
+      el.textContent = text;             // textContent = no HTML injection
+      log.appendChild(el);
+      log.scrollTop = log.scrollHeight;
+      return el;
+    }
+
+    function toggle(open) {
+      panel.classList.toggle('open', open);
+      fab.setAttribute('aria-expanded', open);
+      if (open) {
+        if (!log.children.length) add('bot', "Hi! I'm an AI assistant built with Claude. Ask me anything about Adham's skills, projects, or services.");
+        input.focus();
+      }
+    }
+
+    async function send(text) {
+      text = (text || input.value).trim();
+      if (!text || busy) return;
+      busy = true; sendBtn.disabled = true; input.value = '';
+      suggest.style.display = 'none';
+      add('user', text);
+      history.push({ role: 'user', content: text });
+      const pending = add('bot', '…');
+      try {
+        const r = await fetch(CHAT_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history })
+        });
+        if (!r.ok) throw new Error(r.status);
+        const data = await r.json();
+        pending.textContent = data.reply;
+        history.push({ role: 'assistant', content: data.reply });
+      } catch (e) {
+        pending.textContent = "Sorry, I can't answer right now. You can email adhamelzaim925@gmail.com instead.";
+        history.pop();                   // drop the unanswered user turn
+      }
+      busy = false; sendBtn.disabled = false; input.focus();
+    }
+
+    fab.addEventListener('click', () => toggle(!panel.classList.contains('open')));
+    document.getElementById('chatClose').addEventListener('click', () => toggle(false));
+    sendBtn.addEventListener('click', () => send());
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
+    suggest.querySelectorAll('button').forEach(b => b.addEventListener('click', () => send(b.textContent)));
+  })();
 </script>
 
 </body>
