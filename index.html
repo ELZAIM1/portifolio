@@ -821,7 +821,6 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
       <li><a href="#certificates">Certificates</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -859,9 +858,10 @@
       <div class="section-label mono">01 — About</div>
       <div class="section-body about-body">
         <h2>My journey with data</h2>
-        <p>My journey began with the As a <strong>Data Science student at the Faculty of Artificial Intelligence, Kafr El Sheikh University</strong>, I've paired that hands-on training with real academic depth: computer vision, natural language processing, computer networks, database systems, operating systems, and machine learning theory. I also serve as a <strong>Machine Learning / NLP Committee Member at IEEE</strong>, where I stay close to how the field is actually moving.</p>
-        <p>I joined <strong>DEPI AWS Machine Learning Engineer track</strong>, where I honed my skills building clear, insightful dashboards and mastering SQL to pull the numbers that actually matter out of messy tables. But I didn't stop at reporting — my love for automation led me to build Python tools and APIs that take over the repetitive parts of data work, so the analysis gets the attention instead.</p>
-        <p>Beyond the technical side, I believe data should tell a story</p>
+        <p>My journey into AI started with a <strong>B.Sc. in Data Science at the Faculty of Artificial Intelligence, Kafr El Sheikh University</strong> (2024–2028). My studies gave me a strong foundation across machine learning, deep learning, natural language processing, computer vision, databases, computer networks, operating systems, probability and statistics, and data visualization.</p>
+        <p>Alongside university, I kept building practical skills through focused training. I completed <strong>Python &amp; C++ foundations</strong> covering OOP and data structures, and an <strong>IBM Machine Learning course on Coursera</strong> focused on applying ML to real-world datasets and pipeline design.</p>
+        <p>I joined the <strong>DEPI AWS Machine Learning Engineer track</strong>, where I developed my practical understanding of machine learning, NLP, generative AI, AWS, SQL, and cloud infrastructure. I also served as a <strong>Machine Learning / NLP Committee Member at IEEE</strong>, applying data science to practical problems and working with real datasets.</p>
+        <p>My focus now is simple: keep turning what I learn into working AI systems — models, APIs, automation, and deployed applications that solve real problems.</p>
 
         <div class="usp-block">
           <h3>Why work with me</h3>
@@ -1116,55 +1116,10 @@
 
   </div>
 </section>
-<section class="education reveal" id="education">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-label mono">06 — Education</div>
-      <div class="section-body">
-        <h2>Background</h2>
-      </div>
-    </div>
-
-    <div class="edu-block">
-      <h3>B.Sc. Data Science — Faculty of Artificial Intelligence</h3>
-      <span class="edu-meta">Kafr El Sheikh University, Egypt · Oct 2024 – May 2028</span>
-      <p style="color:#C8D3E6; margin-bottom:14px; font-size:15.5px;">Core coursework spans the full AI stack — from theory to systems:</p>
-      <div class="tags">
-        <span class="tag">Machine Learning</span>
-        <span class="tag">Deep Learning</span>
-        <span class="tag">Natural Language Processing</span>
-        <span class="tag">Computer Vision</span>
-        <span class="tag">Computer Networks</span>
-        <span class="tag">Database Systems</span>
-        <span class="tag">Operating Systems</span>
-        <span class="tag">Probability &amp; Statistics</span>
-        <span class="tag">Data Visualization</span>
-        <span class="tag">Design &amp; Analysis of Experiments</span>
-      </div>
-    </div>
-
-    <div class="additional-edu">
-      <div class="item">
-        <h4>DataCamp — Python &amp; C++ Foundations</h4>
-        <p>OOP, Data Structures &amp; Algorithms, STL, GUI. Built a to-do list app, a delivery-app CLI, and a calculator GUI. June 2025.</p>
-      </div>
-      <div class="item">
-        <h4>Coursera (IBM) — Machine Learning</h4>
-        <p>Applied ML to real-world datasets, covering dataset handling and pipeline design. December 2025.</p>
-      </div>
-    </div>
-
-    <div class="interests-block">
-      <h3 class="mono">Languages &amp; interests</h3>
-      <p>Arabic-language AI education — authored . Outside of ML: Linux customization (Arch-based distros, Hyprland, i3) and systems programming in C++.</p>
-    </div>
-  </div>
-</section>
-
 <section class="certificates reveal" id="certificates">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-label mono">07 — Certificates</div>
+      <div class="section-label mono">06 — Certificates</div>
       <div class="section-body">
         <h2>Certificates</h2>
       </div>
@@ -1226,7 +1181,7 @@
   </div>
 </footer>
 
-<!-- ============ AI chat widget (powered by Claude) ============ -->
+<!-- ============ Ask AI widget ============ -->
 <button class="chat-fab" id="chatFab" aria-expanded="false" aria-controls="chatPanel">Ask my AI ✦</button>
 
 <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Ask about Adham">
@@ -1263,9 +1218,13 @@
     revealEls.forEach((el) => el.classList.add('in'));
   }
 
-  // ---------- AI chat widget ----------
+  // ---------- Ask AI ----------
+  // The widget works on a static site without exposing an API key.
+  // If a backend is available, set CHAT_API to its /chat endpoint and it
+  // will be used first; otherwise the built-in assistant answers from the
+  // portfolio content below.
   (function () {
-    const CHAT_API = "http://localhost:8000/chat";   // <-- replace with your deployed backend URL + /chat
+    const CHAT_API = ""; // Optional: "https://your-domain.com/chat"
 
     const fab = document.getElementById('chatFab');
     const panel = document.getElementById('chatPanel');
@@ -1276,10 +1235,20 @@
     const history = [];
     let busy = false;
 
-    function add(role, text) {
+    const knowledge = {
+      intro: "Adham Ibrahim Ahmed is an AI & Data Science Engineer focused on practical machine learning solutions, APIs, automation, and deployment.",
+      skills: "His stack includes Python, C++, SQL, Pandas, NumPy, scikit-learn, PyTorch, TensorFlow, OpenCV, FastAPI, SQLAlchemy, Docker, Git, AWS, MLflow, Streamlit, and data engineering tools.",
+      services: "He offers practical machine learning solutions, data analysis and dashboards, NLP/computer-vision workflows, and APIs, automation, and MLOps delivery.",
+      education: "Adham is pursuing a B.Sc. in Data Science at the Faculty of Artificial Intelligence, Kafr El Sheikh University (2024–2028). His studies include machine learning, deep learning, NLP, computer vision, databases, networking, operating systems, probability and statistics, and data visualization. He also completed Python & C++ foundations and an IBM Machine Learning course on Coursera.",
+      experience: "He is a trainee in the DEPI AWS Machine Learning Engineer track, covering machine learning, NLP, generative AI, AWS, SQL, and cloud infrastructure. He also served as an IEEE Machine Learning / NLP Committee Member.",
+      projects: "His portfolio includes a Medical Condition Prediction API built with Python, FastAPI, SQLAlchemy, and Docker, plus machine-learning and NLP projects.",
+      contact: "You can contact Adham at adhamelzaim925@gmail.com. The portfolio also includes a CV download and project links."
+    };
+
+    function add(role, message) {
       const el = document.createElement('div');
       el.className = 'chat-msg ' + (role === 'user' ? 'user' : 'bot');
-      el.textContent = text;             // textContent = no HTML injection
+      el.textContent = message;
       log.appendChild(el);
       log.scrollTop = log.scrollHeight;
       return el;
@@ -1287,36 +1256,81 @@
 
     function toggle(open) {
       panel.classList.toggle('open', open);
-      fab.setAttribute('aria-expanded', open);
+      fab.setAttribute('aria-expanded', String(open));
       if (open) {
-        if (!log.children.length) add('bot', "Hi! I'm an AI assistant built with Claude. Ask me anything about Adham's skills, projects, or services.");
+        if (!log.children.length) {
+          add('bot', "Hi! I'm Adham's AI assistant. Ask me about his skills, journey, projects, education, services, or how to contact him.");
+        }
         input.focus();
+      }
+    }
+
+    function localAnswer(question) {
+      const q = question.toLowerCase();
+
+      if (/^(hi|hello|hey|who are you|what can you do)/.test(q)) return knowledge.intro;
+      if (q.includes('project') || q.includes('built') || q.includes('portfolio')) return knowledge.projects;
+      if (q.includes('skill') || q.includes('stack') || q.includes('technolog') || q.includes('tool')) return knowledge.skills;
+      if (q.includes('service') || q.includes('hire') || q.includes('help') || q.includes('freelanc')) return knowledge.services;
+      if (q.includes('education') || q.includes('university') || q.includes('degree') || q.includes('study') || q.includes('course')) return knowledge.education;
+      if (q.includes('experience') || q.includes('depi') || q.includes('ieee') || q.includes('training')) return knowledge.experience;
+      if (q.includes('contact') || q.includes('email') || q.includes('reach')) return knowledge.contact;
+
+      const keywords = [
+        ['python', knowledge.skills], ['aws', knowledge.experience], ['machine learning', knowledge.skills],
+        ['fastapi', knowledge.skills], ['docker', knowledge.skills], ['nlp', knowledge.experience],
+        ['data science', knowledge.education], ['cv', knowledge.contact]
+      ];
+      const match = keywords.find(([key]) => q.includes(key));
+      if (match) return match[1];
+
+      return "I can answer questions about Adham's skills, education and journey, projects, experience, services, or contact details. Try asking: “What projects has he built?” or “What is his tech stack?”";
+    }
+
+    async function askBackend(messages) {
+      if (!CHAT_API) return null;
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+      try {
+        const r = await fetch(CHAT_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages }),
+          signal: controller.signal
+        });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const data = await r.json();
+        return data.reply || null;
+      } finally {
+        clearTimeout(timer);
       }
     }
 
     async function send(text) {
       text = (text || input.value).trim();
       if (!text || busy) return;
-      busy = true; sendBtn.disabled = true; input.value = '';
+
+      busy = true;
+      sendBtn.disabled = true;
+      input.value = '';
       suggest.style.display = 'none';
       add('user', text);
       history.push({ role: 'user', content: text });
       const pending = add('bot', '…');
+
       try {
-        const r = await fetch(CHAT_API, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: history })
-        });
-        if (!r.ok) throw new Error(r.status);
-        const data = await r.json();
-        pending.textContent = data.reply;
-        history.push({ role: 'assistant', content: data.reply });
-      } catch (e) {
-        pending.textContent = "Sorry, I can't answer right now. You can email adhamelzaim925@gmail.com instead.";
-        history.pop();                   // drop the unanswered user turn
+        let reply = null;
+        try { reply = await askBackend(history); } catch (_) {}
+        reply = reply || localAnswer(text);
+        pending.textContent = reply;
+        history.push({ role: 'assistant', content: reply });
+      } catch (_) {
+        pending.textContent = "I couldn't process that question. Please email adhamelzaim925@gmail.com.";
+      } finally {
+        busy = false;
+        sendBtn.disabled = false;
+        input.focus();
       }
-      busy = false; sendBtn.disabled = false; input.focus();
     }
 
     fab.addEventListener('click', () => toggle(!panel.classList.contains('open')));
