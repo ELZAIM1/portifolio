@@ -1226,7 +1226,106 @@
   </div>
 </footer>
 
+<!-- ============ AI chat widget (powered by Claude) ============ -->
+<button class="chat-fab" id="chatFab" aria-expanded="false" aria-controls="chatPanel">Ask my AI ✦</button>
 
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Ask about Adham">
+  <div class="chat-head">
+    <span>ask_adhams_ai()</span>
+    <button id="chatClose" aria-label="Close chat">×</button>
+  </div>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="chat-suggest" id="chatSuggest">
+    <button>What projects has he built?</button>
+    <button>What is his tech stack?</button>
+    <button>How can I hire him?</button>
+  </div>
+  <div class="chat-input">
+    <input id="chatText" type="text" maxlength="500" placeholder="Ask about skills, projects, services…" autocomplete="off">
+    <button id="chatSend">Send</button>
+  </div>
+</div>
+
+<script>
+  // Single orchestrated reveal-on-scroll for each section
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('in'));
+  }
+
+  // ---------- AI chat widget ----------
+  (function () {
+    const CHAT_API = "http://localhost:8000/chat";   // <-- replace with your deployed backend URL + /chat
+
+    const fab = document.getElementById('chatFab');
+    const panel = document.getElementById('chatPanel');
+    const log = document.getElementById('chatLog');
+    const input = document.getElementById('chatText');
+    const sendBtn = document.getElementById('chatSend');
+    const suggest = document.getElementById('chatSuggest');
+    const history = [];
+    let busy = false;
+
+    function add(role, text) {
+      const el = document.createElement('div');
+      el.className = 'chat-msg ' + (role === 'user' ? 'user' : 'bot');
+      el.textContent = text;             // textContent = no HTML injection
+      log.appendChild(el);
+      log.scrollTop = log.scrollHeight;
+      return el;
+    }
+
+    function toggle(open) {
+      panel.classList.toggle('open', open);
+      fab.setAttribute('aria-expanded', open);
+      if (open) {
+        if (!log.children.length) add('bot', "Hi! I'm an AI assistant built with Claude. Ask me anything about Adham's skills, projects, or services.");
+        input.focus();
+      }
+    }
+
+    async function send(text) {
+      text = (text || input.value).trim();
+      if (!text || busy) return;
+      busy = true; sendBtn.disabled = true; input.value = '';
+      suggest.style.display = 'none';
+      add('user', text);
+      history.push({ role: 'user', content: text });
+      const pending = add('bot', '…');
+      try {
+        const r = await fetch(CHAT_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history })
+        });
+        if (!r.ok) throw new Error(r.status);
+        const data = await r.json();
+        pending.textContent = data.reply;
+        history.push({ role: 'assistant', content: data.reply });
+      } catch (e) {
+        pending.textContent = "Sorry, I can't answer right now. You can email adhamelzaim925@gmail.com instead.";
+        history.pop();                   // drop the unanswered user turn
+      }
+      busy = false; sendBtn.disabled = false; input.focus();
+    }
+
+    fab.addEventListener('click', () => toggle(!panel.classList.contains('open')));
+    document.getElementById('chatClose').addEventListener('click', () => toggle(false));
+    sendBtn.addEventListener('click', () => send());
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
+    suggest.querySelectorAll('button').forEach(b => b.addEventListener('click', () => send(b.textContent)));
+  })();
+</script>
 
 </body>
 </html>
